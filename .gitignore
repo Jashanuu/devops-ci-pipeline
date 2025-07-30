@@ -1,0 +1,10 @@
+# Ignore compiled Java class files
+*.class
+
+# Ignore JUnit jar file (you can re-download it)
+junit-4.10.jar
+
+# Ignore temporary files from editors or OS
+*.log
+*.swp
+.DS_Store
