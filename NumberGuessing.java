@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class NumberGuessing {
 
@@ -10,18 +11,26 @@ public class NumberGuessing {
         System.out.println("A number is chosen between 1 and 100.");
         System.out.println("You have " + K + " attempts to guess the correct number.");
 
-        for (int i = 0; i < K; i++) {
+        int attempts = 0;
+        while (attempts < K) {
             System.out.print("Enter your guess: ");
-            int guess = sc.nextInt();
+            try {
+                int guess = sc.nextInt();
 
-            if (guess == number) {
-                System.out.println("Congratulations! You guessed the correct number.");
-                sc.close();
-                return;
-            } else if (guess < number) {
-                System.out.println("The number is greater than " + guess);
-            } else {
-                System.out.println("The number is less than " + guess);
+                if (guess == number) {
+                    System.out.println("Congratulations! You guessed the correct number.");
+                    sc.close();
+                    return;
+                } else if (guess < number) {
+                    System.out.println("The number is greater than " + guess);
+                } else {
+                    System.out.println("The number is less than " + guess);
+                }
+
+                attempts++;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter an integer.");
+                sc.next(); // clear the invalid input
             }
         }
 
@@ -30,10 +39,7 @@ public class NumberGuessing {
     }
 
     public static void main(String[] args) {
-        // 👇 This line is for CI pipeline test
         System.out.println("CI Test run!");
-
         guessingNumberGame();
     }
 }
-//dasd
